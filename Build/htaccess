@@ -1,0 +1,47 @@
+<!-- 
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php81” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php81 .php .php8 .phtml
+  # The following lines are required for builds without decompression fallback, compressed with gzip
+  
+  AddOutputFilterByType BROTLI text/html text/plain text/xml text/css text/javascript application/javascript application/json
+    Header append Content-Encoding br
+
+RemoveType .gz
+AddEncoding gzip .gz
+AddType application/octet-stream .data.gz
+AddType application/wasm .wasm.gz
+AddType application/javascript .js.gz
+AddType application/octet-stream .symbols.json.gz
+
+# The following lines are required for builds without decompression fallback, compressed with Brotli
+RemoveType .br
+RemoveLanguage .br
+AddEncoding br .br
+AddType application/octet-stream .data.br
+AddType application/wasm .wasm.br
+AddType application/javascript .js.br
+AddType application/octet-stream .symbols.json.br
+
+# The following line improves loading performance for uncompressed builds
+AddType application/wasm .wasm
+
+# Uncomment the following line to improve loading performance for gzip-compressed builds with decompression fallback
+# AddEncoding gzip .unityweb
+
+# Uncomment the following line to improve loading performance for brotli-compressed builds with decompression fallback
+AddEncoding br .unityweb
+</IfModule>
+# php -- END cPanel-generated handler, do not edit -->
+<IfModule mod_brotli.c>
+    # Enable Brotli compression
+    AddOutputFilterByType BROTLI text/html text/plain text/css application/javascript application/json
+    Header append Content-Encoding br
+</IfModule>
+
+<IfModule mod_deflate.c>
+    # Fallback to gzip if Brotli is not available
+    AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json
+</IfModule>
